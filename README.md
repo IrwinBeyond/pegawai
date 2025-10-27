@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="resources/images/logo-lockup.png" alt="Logo" width="400">
+    <img src="resources/images/pegawai-logo-lockup.png" alt="Logo" width="400">
 </p>
 
 <h1 align="center">Employee Management System</h1>
