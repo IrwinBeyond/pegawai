@@ -1,18 +1,18 @@
 @extends('master')
-@section('title', 'Daftar Pegawai')
+@section('title', 'Daftar Gaji Pegawai')
 @section('content')
 <div class="bg-white rounded-lg shadow-md p-6">
     <div class="flex justify-between items-center mb-6">
         <div>
-            <h2 class="text-2xl font-bold text-gray-800">Data Pegawai</h2>
-            <p class="text-sm text-gray-600 mt-1">Kelola pegawai dalam perusahaan</p>
+            <h2 class="text-2xl font-bold text-gray-800">Data Gaji Pegawai</h2>
+            <p class="text-sm text-gray-600 mt-1">Kelola gaji pegawai dalam perusahaan</p>
         </div>
-        <a href="{{ route('employees.create') }}">
+        <a href="{{ route('salaries.create') }}">
             <button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center space-x-2">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                 </svg>
-                <span>Tambah Pegawai</span>
+                <span>Tambah Data Gaji</span>
             </button>
         </a>
     </div>
@@ -21,50 +21,33 @@
         <table class="min-w-full table-auto">
             <thead>
                 <tr class="bg-blue-600 text-white">
-                    <th class="px-4 py-3 text-left text-sm font-semibold">Nama Lengkap</th>
-                    <th class="px-4 py-3 text-left text-sm font-semibold">Email</th>
-                    <th class="px-4 py-3 text-left text-sm font-semibold">Nomor Telepon</th>
-                    <th class="px-4 py-3 text-left text-sm font-semibold">Tanggal Lahir</th>
-                    <th class="px-4 py-3 text-left text-sm font-semibold">Alamat</th>
-                    <th class="px-4 py-3 text-left text-sm font-semibold">Tanggal Masuk</th>
-                    <th class="px-4 py-3 text-left text-sm font-semibold">Departemen</th>
-                    <th class="px-4 py-3 text-left text-sm font-semibold">Jabatan</th>
-                    <th class="px-4 py-3 text-left text-sm font-semibold">Status</th>
+                    <th class="px-4 py-3 text-left text-sm font-semibold">Nama Pegawai</th>
+                    <th class="px-4 py-3 text-left text-sm font-semibold">Bulan</th>
+                    <th class="px-4 py-3 text-right text-sm font-semibold">Gaji Pokok</th>
+                    <th class="px-4 py-3 text-right text-sm font-semibold">Tunjangan</th>
+                    <th class="px-4 py-3 text-right text-sm font-semibold">Potongan</th>
+                    <th class="px-4 py-3 text-right text-sm font-semibold">Total Gaji</th>
                     <th class="px-4 py-3 text-center text-sm font-semibold">Aksi</th>
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-                @forelse($employees as $employee)
+                @forelse($salaries as $salary)
                 <tr class="hover:bg-gray-50 transition-colors duration-200">
-                    <td class="px-4 py-3 text-sm text-gray-800">{{ $employee->nama_lengkap }}</td>
-                    <td class="px-4 py-3 text-sm text-gray-600">{{ $employee->email }}</td>
-                    <td class="px-4 py-3 text-sm text-gray-600">{{ $employee->nomor_telepon }}</td>
-                    <td class="px-4 py-3 text-sm text-gray-600">{{ $employee->tanggal_lahir }}</td>
-                    <td class="px-4 py-3 text-sm text-gray-600">{{ $employee->alamat }}</td>
-                    <td class="px-4 py-3 text-sm text-gray-600">{{ $employee->tanggal_masuk }}</td>
-                    <td class="px-4 py-3 text-sm text-gray-600">{{ $employee->department->nama_departemen ?? 'Tidak Ditemukan' }}</td>
-                    <td class="px-4 py-3 text-sm text-gray-600">{{ $employee->position->nama_jabatan ?? 'Tidak Ditemukan' }}</td>
-                    <td class="px-4 py-3 text-sm">
-                        <span class="px-3 py-1 rounded-full text-xs font-semibold {{ $employee->status == 'aktif' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                            {{ ucfirst($employee->status) }}
-                        </span>
-                    </td>
+                    <td class="px-4 py-3 text-sm text-gray-800 font-medium">{{ $salary->employee->nama_lengkap ?? 'Tidak Ditemukan' }}</td>
+                    <td class="px-4 py-3 text-sm text-gray-600">{{ $salary->bulan }}</td>
+                    <td class="px-4 py-3 text-sm text-gray-600 text-right">Rp {{ number_format($salary->gaji_pokok, 0, ',', '.') }}</td>
+                    <td class="px-4 py-3 text-sm text-green-600 text-right">Rp {{ number_format($salary->tunjangan, 0, ',', '.') }}</td>
+                    <td class="px-4 py-3 text-sm text-red-600 text-right">Rp {{ number_format($salary->potongan, 0, ',', '.') }}</td>
+                    <td class="px-4 py-3 text-sm text-gray-800 font-bold text-right">Rp {{ number_format($salary->total_gaji, 0, ',', '.') }}</td>
                     <td class="px-4 py-3 text-sm">
                         <div class="flex items-center justify-center space-x-2">
-                            <a href="{{ route('employees.show', $employee->id) }}" class="text-blue-600 hover:text-blue-800 transition-colors duration-200" title="Detail">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                                </svg>
-                            </a>
-                            
-                            <a href="{{ route('employees.edit', $employee->id) }}" class="text-yellow-600 hover:text-yellow-800 transition-colors duration-200" title="Edit">
+                            <a href="{{ route('salaries.edit', $salary->id) }}" class="text-yellow-600 hover:text-yellow-800 transition-colors duration-200" title="Edit">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                 </svg>
                             </a>
                             
-                            <button type="button" onclick="openDeleteModal({{ $employee->id }}, '{{ $employee->nama_lengkap }}')" class="text-red-600 hover:text-red-800 transition-colors duration-200" title="Delete">
+                            <button type="button" onclick="openDeleteModal({{ $salary->id }}, '{{ $salary->employee->nama_lengkap ?? 'Data' }}', '{{ $salary->bulan }}')" class="text-red-600 hover:text-red-800 transition-colors duration-200" title="Delete">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                 </svg>
@@ -74,13 +57,13 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="10" class="px-4 py-8 text-center text-gray-500">
+                    <td colspan="7" class="px-4 py-8 text-center text-gray-500">
                         <div class="flex flex-col items-center space-y-3">
                             <svg class="w-16 h-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            <p class="text-lg font-medium">Belum ada data pegawai</p>
-                            <p class="text-sm">Silakan tambah pegawai baru dengan menekan tombol di atas</p>
+                            <p class="text-lg font-medium">Belum ada data gaji</p>
+                            <p class="text-sm">Silakan tambah data gaji baru dengan menekan tombol di atas</p>
                         </div>
                     </td>
                 </tr>
@@ -91,7 +74,7 @@
 
     <div class="mt-6 flex justify-end items-center">
         <div>
-            {{ $employees->links() }}
+            {{ $salaries->links() }}
         </div>
     </div>
 </div>
@@ -106,9 +89,9 @@
             </div>
             
             <div class="mt-4 text-center">
-                <h3 class="text-lg font-bold text-gray-900">Hapus Pegawai</h3>
+                <h3 class="text-lg font-bold text-gray-900">Hapus Data Gaji</h3>
                 <p class="mt-2 text-sm text-gray-600">
-                    Apakah Anda yakin ingin menghapus pegawai <span id="employeeName" class="font-semibold text-gray-900"></span>?
+                    Apakah Anda yakin ingin menghapus data gaji <span id="employeeName" class="font-semibold text-gray-900"></span> untuk bulan <span id="salaryMonth" class="font-semibold text-gray-900"></span>?
                 </p>
                 <p class="mt-1 text-sm text-red-600">
                     Data yang sudah dihapus tidak dapat dikembalikan!
@@ -153,10 +136,11 @@
 </style>
 
 <script>
-    function openDeleteModal(employeeId, employeeName) {
+    function openDeleteModal(salaryId, employeeName, salaryMonth) {
         const modal = document.getElementById('deleteModal');
         document.getElementById('employeeName').textContent = employeeName;
-        document.getElementById('deleteForm').action = '/employees/' + employeeId;
+        document.getElementById('salaryMonth').textContent = salaryMonth;
+        document.getElementById('deleteForm').action = '/salaries/' + salaryId;
         
         modal.classList.remove('pointer-events-none');
         setTimeout(() => {
