@@ -102,7 +102,7 @@ To run this project properly, make sure you have installed:
 ---
 
 ### 🏢 Departments
-- **Index * Create Page**
+- **Index & Create Page**
 
   <img src="resources/images/departments/index.png" width="400">
 
@@ -132,7 +132,7 @@ To run this project properly, make sure you have installed:
 ---
 
 ### 🕒 Attendances
-- **Index Page**
+- **Index & Create Page**
 
   <img src="resources/images/attendances/index.png" width="400">
 
