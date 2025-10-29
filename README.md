@@ -71,15 +71,78 @@ To run this project properly, make sure you have installed:
 
 ---
 
-## 🖼️ UI Screenshots (Coming Soon)
+## 🖼️ UI Screenshots
 
-| Feature | Screenshot |
-|----------|-------------|
-| Employees | *(screenshot placeholder)* |
-| Departments | *(screenshot placeholder)* |
-| Positions | *(screenshot placeholder)* |
-| Attendances | *(screenshot placeholder)* |
-| Salaries | *(screenshot placeholder)* |
+### Welcome Page
+<img src="resource/images/pegawai-welcome-page.png" width="600">
+
+### 👥 Employees
+**Main Pages**
+- **Index Page**
+  <img src="resources/images/employees/index.png" width="600">
+
+- **Create Page**
+  <img src="resources/images/employees/create.png" width="600">
+
+- **Edit Page**
+  <img src="resources/images/employees/edit.png" width="600">
+
+- **Show Page**
+  <img src="resources/images/employees/show.png" width="600">
+
+- **Delete (Destroy) Confirmation**
+  <img src="resources/images/employees/destroy.png" width="600">
+
+---
+
+### 🏢 Departments
+- **Index * Create Page**
+  <img src="resources/images/departments/index.png" width="600">
+
+- **Edit Page**
+  <img src="resources/images/departments/edit.png" width="600">
+
+- **Delete (Destroy) Confirmation**
+  <img src="resources/images/departments/destroy.png" width="600">
+
+---
+
+### 💼 Positions
+- **Index & Create Page**
+  <img src="resources/images/positions/index.png" width="600">
+
+- **Edit Page**
+  <img src="resources/images/positions/edit.png" width="600">
+
+- **Delete (Destroy) Confirmation**
+  <img src="resources/images/positions/destroy.png" width="600">
+
+---
+
+### 🕒 Attendances
+- **Index Page**
+  <img src="resources/images/attendances/index.png" width="600">
+
+- **Edit Page**
+  <img src="resources/images/attendances/edit.png" width="600">
+
+- **Delete (Destroy) Confirmation**
+  <img src="resources/images/attendances/destroy.png" width="600">
+
+---
+
+### 💰 Salaries
+- **Index Page**
+  <img src="resources/images/salaries/index.png" width="600">
+
+- **Create Page**
+  <img src="resources/images/salaries/create.png" width="600">
+
+- **Edit Page**
+  <img src="resources/images/salaries/edit.png" width="600">
+
+- **Delete (Destroy) Confirmation**
+  <img src="resources/images/salaries/destroy.png" width="600">
 
 ---
 
