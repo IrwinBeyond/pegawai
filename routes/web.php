@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\DepartmentController;
-use App\Http\Controllers\PositionController;
-use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\EmployeeAttendanceController;
-use App\Http\Controllers\SalaryController;
-use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\Admin\DepartmentController;
+use App\Http\Controllers\Admin\PositionController;
+use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Employee\EmployeeAttendanceController;
+use App\Http\Controllers\Admin\SalaryController;
+use App\Http\Controllers\Admin\AttendanceController;
 
 Route::get('/', function () {
     return view('welcome');

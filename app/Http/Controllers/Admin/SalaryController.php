@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Salary;
 use App\Models\Employee;
@@ -14,7 +15,7 @@ class SalaryController extends Controller
     public function index()
     {
         $salaries = Salary::with('employee')->latest()->paginate(5);
-        return view('salaries.index', compact('salaries'));
+        return view('admin.salaries.index', compact('salaries'));
     }
 
     /**
@@ -23,7 +24,7 @@ class SalaryController extends Controller
     public function create()
     {
         $employees = Employee::with('position')->get();
-        return view('salaries.create', compact('employees'));
+        return view('admin.salaries.create', compact('employees'));
     }
 
     /**
@@ -51,7 +52,7 @@ class SalaryController extends Controller
             'total_gaji' => $gajiTotal,
         ]);
 
-        return redirect()->route('salaries.index');
+        return redirect()->route('admin.salaries.index');
     }
 
     /**
@@ -60,7 +61,7 @@ class SalaryController extends Controller
     public function show(string $id)
     {
         $salary = Salary::with('employee')->findOrFail($id);
-        return view('salaries.show', compact('salary'));
+        return view('admin.salaries.show', compact('salary'));
     }
 
     /**
@@ -70,7 +71,7 @@ class SalaryController extends Controller
     {
         $salary = Salary::findOrFail($id);
         $employees = Employee::with('position')->get();
-        return view('salaries.edit', compact('salary', 'employees'));
+        return view('admin.salaries.edit', compact('salary', 'employees'));
     }
 
     /**
@@ -99,7 +100,7 @@ class SalaryController extends Controller
             'total_gaji' => $gajiTotal,
         ]);
 
-        return redirect()->route('salaries.index');
+        return redirect()->route('admin.salaries.index');
     }
 
     /**
@@ -110,6 +111,6 @@ class SalaryController extends Controller
         $salary = Salary::findOrFail($id);
         $salary->delete();
 
-        return redirect()->route('salaries.index');
+        return redirect()->route('admin.salaries.index');
     }
 }

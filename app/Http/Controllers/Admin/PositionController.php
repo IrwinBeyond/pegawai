@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Position;
 use App\Models\Department;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class PositionController extends Controller
     {
         $positions = Position::latest()->paginate(5);
         $departments = Department::all();
-        return view('positions.index', compact('positions', 'departments'));
+        return view('admin.positions.index', compact('positions', 'departments'));
     }
 
     /**
@@ -23,7 +24,7 @@ class PositionController extends Controller
      */
     public function create()
     {
-        return view('positions.create');
+        return view('admin.positions.create');
     }
 
     /**
@@ -38,7 +39,7 @@ class PositionController extends Controller
 
         Position::create($request->only(['nama_jabatan', 'gaji_pokok']));
 
-        return redirect()->route('positions.index');
+        return redirect()->route('admin.positions.index');
     }
 
     /**
@@ -47,7 +48,7 @@ class PositionController extends Controller
     public function show(string $id)
     {
         $position = Position::findOrFail($id);
-        return view('positions.show', compact('position'));
+        return view('admin.positions.show', compact('position'));
     }
 
     /**
@@ -56,7 +57,7 @@ class PositionController extends Controller
     public function edit(string $id)
     {
         $position = Position::findOrFail($id);
-        return view('positions.edit', compact('position'));
+        return view('admin.positions.edit', compact('position'));
     }
 
     /**
@@ -72,7 +73,7 @@ class PositionController extends Controller
         $position = Position::findOrFail($id);
         $position->update($request->only(['nama_jabatan', 'gaji_pokok']));
 
-        return redirect()->route('positions.index');
+        return redirect()->route('admin.positions.index');
     }
 
     /**
@@ -83,6 +84,6 @@ class PositionController extends Controller
         $position = Position::findOrFail($id);
         $position->delete();
 
-        return redirect()->route('positions.index');
+        return redirect()->route('admin.positions.index');
     }
 }

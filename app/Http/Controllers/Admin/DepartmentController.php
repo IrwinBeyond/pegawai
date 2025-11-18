@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Department;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class DepartmentController extends Controller
     public function index()
     {
         $departments = Department::latest()->paginate(5);
-        return view('departments.index', compact('departments'));
+        return view('admin.departments.index', compact('departments'));
     }
 
     /**
@@ -21,7 +22,7 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        return view('departments.create');
+        return view('admin.departments.create');
     }
 
     /**
@@ -35,7 +36,7 @@ class DepartmentController extends Controller
 
         Department::create($request->only(['nama_departemen']));
 
-        return redirect()->route('departments.index');
+        return redirect()->route('admin.departments.index');
     }
 
     /**
@@ -44,7 +45,7 @@ class DepartmentController extends Controller
     public function show(string $id)
     {
         $department = Department::with('employees')->findOrFail($id);
-        return view('departments.show', compact('department'));
+        return view('admin.departments.show', compact('department'));
     }
 
     /**
@@ -53,7 +54,7 @@ class DepartmentController extends Controller
     public function edit(string $id)
     {
         $department = Department::findOrFail($id);
-        return view('departments.edit', compact('department'));
+        return view('admin.departments.edit', compact('department'));
     }
 
     /**
@@ -68,7 +69,7 @@ class DepartmentController extends Controller
         $department = Department::findOrFail($id);
         $department->update($request->only(['nama_departemen']));
 
-        return redirect()->route('departments.index');
+        return redirect()->route('admin.departments.index');
     }
 
     /**
@@ -79,6 +80,6 @@ class DepartmentController extends Controller
         $department = Department::findOrFail($id);
         $department->delete();
 
-        return redirect()->route('departments.index');
+        return redirect()->route('admin.departments.index');
     }
 }

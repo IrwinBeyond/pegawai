@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Attendance;
 use App\Models\Employee;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class AttendanceController extends Controller
     {
         $attendances = Attendance::with('employee')->latest()->paginate(5);
         $employees = Employee::all();
-        return view('attendances.index', compact('attendances', 'employees'));   
+        return view('admin.attendances.index', compact('attendances', 'employees'));   
     }
 
     /**
@@ -24,7 +25,7 @@ class AttendanceController extends Controller
     public function create()
     {
         $employees = Employee::all();
-        return view('attendances.create', compact('employees'));
+        return view('admin.attendances.create', compact('employees'));
     }
 
     /**
@@ -48,7 +49,7 @@ class AttendanceController extends Controller
             'status_absensi',
         ]));
 
-        return redirect()->route('attendances.index');
+        return redirect()->route('admin.attendances.index');
     }
 
     /**
@@ -57,7 +58,7 @@ class AttendanceController extends Controller
     public function show(string $id)
     {
         $attendance = Attendance::with('employee')->findOrFail($id);
-        return view('attendances.show', compact('attendance'));
+        return view('admin.attendances.show', compact('attendance'));
     }
 
     /**
@@ -67,7 +68,7 @@ class AttendanceController extends Controller
     {
         $attendance = Attendance::findOrFail($id);
         $employees = Employee::all();
-        return view('attendances.edit', compact('attendance', 'employees'));
+        return view('admin.attendances.edit', compact('attendance', 'employees'));
     }
 
     /**
@@ -92,7 +93,7 @@ class AttendanceController extends Controller
             'status_absensi',
         ]));
 
-        return redirect()->route('attendances.index');
+        return redirect()->route('admin.attendances.index');
     }
 
     /**
@@ -103,6 +104,6 @@ class AttendanceController extends Controller
         $attendance = Attendance::findOrFail($id);
         $attendance->delete();
 
-        return redirect()->route('attendances.index');
+        return redirect()->route('admin.attendances.index');
     }
 }

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Models\Department;
 use App\Models\Position;
@@ -16,7 +17,7 @@ class EmployeeController extends Controller
     {
         $employees = Employee::with(relations: ['department', 'position'])->latest()->paginate(5);
 
-        return view('employees.index', compact('employees'));
+        return view('admin.employees.index', compact('employees'));
     }
 
     /**
@@ -27,7 +28,7 @@ class EmployeeController extends Controller
         $departments = Department::all();
         $positions = Position::all();
 
-        return view('employees.create', compact('departments', 'positions'));
+        return view('admin.employees.create', compact('departments', 'positions'));
     }
 
     /**
@@ -59,7 +60,7 @@ class EmployeeController extends Controller
             'status'
         ]));
 
-        return redirect()->route('employees.index');
+        return redirect()->route('admin.employees.index');
     }
 
     /**
@@ -68,7 +69,7 @@ class EmployeeController extends Controller
     public function show(string $id)
     {
         $employee = Employee::with(['department', 'position'])->findOrFail($id);
-        return view('employees.show', compact('employee'));
+        return view('admin.employees.show', compact('employee'));
     }
 
     /**
@@ -80,7 +81,7 @@ class EmployeeController extends Controller
         $departments = Department::all();
         $positions = Position::all();
 
-        return view('employees.edit', compact('employee', 'departments', 'positions'));
+        return view('admin.employees.edit', compact('employee', 'departments', 'positions'));
     }
 
     /**
@@ -113,7 +114,7 @@ class EmployeeController extends Controller
             'status'
         ]));
 
-        return redirect()->route('employees.index');
+        return redirect()->route('admin.employees.index');
     }
 
     /**
@@ -123,6 +124,6 @@ class EmployeeController extends Controller
     {
         $employee = Employee::findOrFail($id);
         $employee->delete();
-        return redirect()->route('employees.index');
+        return redirect()->route('admin.employees.index');
     }
 }
