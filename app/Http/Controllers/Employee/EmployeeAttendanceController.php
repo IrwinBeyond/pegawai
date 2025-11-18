@@ -28,7 +28,7 @@ class EmployeeAttendanceController extends Controller
             ->limit(30)
             ->get();
 
-        return view('employee.attendance.index', compact(
+        return view('employee.attendances.index', compact(
             'employee',
             'todayAttendance',
             'attendances'
@@ -61,7 +61,6 @@ class EmployeeAttendanceController extends Controller
         }
 
         $attendance->waktu_masuk = now()->format('H:i');
-        // default status ke hadir jika belum ada
         if (!$attendance->status_absensi) {
             $attendance->status_absensi = 'hadir';
         }

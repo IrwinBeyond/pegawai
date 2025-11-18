@@ -36,14 +36,14 @@ Route::middleware(['auth', 'role:employee'])
     ->prefix('employee')
     ->name('employee.')
     ->group(function () {
-        Route::get('attendance', [EmployeeAttendanceController::class, 'index'])
-            ->name('attendance.index');
+        Route::get('attendances', [EmployeeAttendanceController::class, 'index'])
+            ->name('attendances.index');
 
-        Route::post('attendance/check-in', [EmployeeAttendanceController::class, 'checkIn'])
-            ->name('attendance.checkin');
+        Route::post('attendances/check-in', [EmployeeAttendanceController::class, 'checkIn'])
+            ->name('attendances.checkin');
 
-        Route::post('attendance/check-out', [EmployeeAttendanceController::class, 'checkOut'])
-            ->name('attendance.checkout');
+        Route::post('attendances/check-out', [EmployeeAttendanceController::class, 'checkOut'])
+            ->name('attendances.checkout');
 });
 
 
