@@ -12,7 +12,7 @@
         <div class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
 
-                <a href="{{ url('/') }}" class="flex items-center space-x-2 transition-all duration-300">
+                <a href="{{ url('/dashboard') }}" class="flex items-center space-x-2 transition-all duration-300">
                     <div class="text-white px-4 py-2 font-bold text-2xl hover:scale-105 transition-all duration-300 italic ease-in-out">
                         PEGAWAI
                     </div>
@@ -62,9 +62,9 @@
 
                             @if (auth()->user()->role === 'employee')
                                 <li>
-                                    <a href="{{ route('employee.attendances.index') }}"
+                                    <a href="{{ route('employee.home') }}"
                                        class="block px-4 py-2 text-white rounded-lg transition-all duration-300 ease-in-out hover:bg-blue-700
-                                           {{ request()->is('employee/attendances') ? 'font-bold' : 'hover:font-bold' }}">
+                                           {{ request()->is('employee/') ? 'font-bold' : 'hover:font-bold' }}">
                                         Home
                                     </a>
                                 </li>
