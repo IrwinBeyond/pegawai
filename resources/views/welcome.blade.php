@@ -41,13 +41,6 @@
                             Masuk
                         </a>
                     @endif
-
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}"
-                           class="inline-flex items-center px-6 py-3 rounded-full border-2 border-white text-white font-semibold hover:bg-white/10 hover:-translate-y-0.5 transition-all duration-300">
-                            Daftar Akun
-                        </a>
-                    @endif
                 </div>
 
                 <p class="mt-4 text-blue-100 text-sm">

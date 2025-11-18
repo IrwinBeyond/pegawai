@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\Employee;
 use App\Models\Department;
 use App\Models\Position;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class EmployeeController extends Controller
 {
@@ -125,5 +128,90 @@ class EmployeeController extends Controller
         $employee = Employee::findOrFail($id);
         $employee->delete();
         return redirect()->route('admin.employees.index');
+    }
+
+    public function createUser(Employee $employee)
+    {
+        if ($employee->user) {
+            return redirect()
+                ->route('admin.employees.show', $employee->id)
+                ->with('error', 'Pegawai ini sudah memiliki akun pengguna.');
+        }
+
+        return view('admin.employees.create-user', compact('employee'));
+    }
+
+    public function storeUser(Request $request, Employee $employee)
+    {
+        if ($employee->user) {
+            return redirect()
+                ->route('admin.employees.show', $employee->id)
+                ->with('error', 'Pegawai ini sudah memiliki akun pengguna.');
+        }
+
+        $validated = $request->validate([
+            'email' => 'required|email|max:255|unique:users,email',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $user = User::create([
+            'name' => $employee->nama_lengkap,
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+            'role' => 'employee',
+        ]);
+
+        $employee->user_id = $user->id;
+        $employee->save();
+
+        return redirect()
+            ->route('admin.employees.show', $employee->id)
+            ->with('success', 'Akun pengguna untuk pegawai berhasil dibuat.');
+    }
+
+    public function editUser(Employee $employee)
+    {
+        if (!$employee->user) {
+            return redirect()
+                ->route('admin.employees.show', $employee->id)
+                ->with('error', 'Pegawai ini belum memiliki akun login.');
+        }
+
+        $user = $employee->user;
+
+        return view('admin.employees.edit-user', compact('employee', 'user'));
+    }
+
+    public function updateUser(Request $request, Employee $employee)
+    {
+        if (!$employee->user) {
+            return redirect()
+                ->route('admin.employees.show', $employee->id)
+                ->with('error', 'Pegawai ini belum memiliki akun login.');
+        }
+
+        $user = $employee->user;
+
+        $validated = $request->validate([
+            'email' => [
+                'required',
+                'email',
+                'max:255',
+                Rule::unique('users', 'email')->ignore($user->id),
+            ],
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $user->email = $validated['email'];
+
+        if (!empty($validated['password'])) {
+            $user->password = Hash::make($validated['password']);
+        }
+
+        $user->save();
+
+        return redirect()
+            ->route('admin.employees.show', $employee->id)
+            ->with('success', 'Informasi akun login berhasil diperbarui.');
     }
 }

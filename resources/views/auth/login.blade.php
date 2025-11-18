@@ -45,11 +45,11 @@
                 <span class="text-gray-700">Ingat saya</span>
             </label>
 
-            @if (Route::has('password.request'))
+            <!-- @if (Route::has('password.request'))
                 <a class="text-blue-600 hover:text-blue-800" href="{{ route('password.request') }}">
                     Lupa kata sandi?
                 </a>
-            @endif
+            @endif -->
         </div>
 
         <div class="pt-2">
@@ -61,12 +61,12 @@
         </div>
     </form>
 
-    @if (Route::has('register'))
+    <!-- @if (Route::has('register'))
         <p class="mt-4 text-center text-xs text-gray-500">
             Belum punya akun?
             <a href="{{ route('register') }}" class="text-blue-600 hover:text-blue-800 font-semibold">
                 Daftar sekarang
             </a>
         </p>
-    @endif
+    @endif -->
 @endsection

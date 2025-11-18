@@ -156,7 +156,64 @@
                 </div>
             </div>
         </div>
+    </div>
+    
+    <div class="mt-8 pt-6 border-t border-gray-200">
+        <div class="flex items-center justify-between mb-3">
+            <div>
+                <h3 class="text-lg font-semibold text-gray-800">Informasi Akun Login</h3>
+                <p class="text-xs text-gray-500">
+                    Akun yang digunakan pegawai ini untuk mengakses portal karyawan.
+                </p>
+            </div>
 
+            @if ($employee->user)
+                <a href="{{ route('admin.employees.edit-user', $employee->id) }}"
+                class="inline-flex items-center px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white text-xs font-semibold rounded-lg shadow-sm transition-all duration-200">
+                    Edit Akun Login
+                </a>
+            @endif
+        </div>
+
+        <div class="bg-gray-50 rounded-lg p-4 border border-dashed border-gray-300">
+            @if (!$employee->user)
+                <p class="text-sm text-gray-700 mb-3">
+                    Pegawai ini <span class="font-semibold text-red-600">belum memiliki akun login</span>.
+                </p>
+                <div class="flex justify-end">
+                    <a href="{{ route('admin.employees.create-user', $employee->id) }}"
+                    class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg shadow hover:bg-blue-700 transition-all duration-200">
+                        Buat Akun Login
+                    </a>
+                </div>
+            @else
+                <dl class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
+                    <div>
+                        <dt class="text-xs font-semibold text-gray-500 uppercase mb-1">Email Login</dt>
+                        <dd class="font-mono text-gray-900 break-all">{{ $employee->user->email }}</dd>
+                    </div>
+                    <div>
+                        <dt class="text-xs font-semibold text-gray-500 uppercase mb-1">Role</dt>
+                        <dd class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold
+                            {{ $employee->user->role === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-green-100 text-green-800' }}">
+                            {{ ucfirst($employee->user->role) }}
+                        </dd>
+                    </div>
+                    <div>
+                        <dt class="text-xs font-semibold text-gray-500 uppercase mb-1">Dibuat Pada</dt>
+                        <dd class="text-gray-800">
+                            {{ optional($employee->user->created_at)->format('d M Y H:i') ?? '-' }}
+                        </dd>
+                    </div>
+                    <div>
+                        <dt class="text-xs font-semibold text-gray-500 uppercase mb-1">Terakhir Diperbarui</dt>
+                        <dd class="text-gray-800">
+                            {{ optional($employee->user->updated_at)->format('d M Y H:i') ?? '-' }}
+                        </dd>
+                    </div>
+                </dl>
+            @endif
+        </div>
     </div>
 </div>
 @endsection

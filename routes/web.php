@@ -23,12 +23,20 @@ Route::middleware(['auth', 'role:admin'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
-    Route::resource('departments', DepartmentController::class);
-    Route::resource('positions', PositionController::class);
-    Route::resource('employees', EmployeeController::class);
-    Route::resource('salaries', SalaryController::class);
-    Route::resource('attendances', AttendanceController::class);
-});
+        Route::resource('departments', DepartmentController::class);
+        Route::resource('positions', PositionController::class);
+        Route::resource('employees', EmployeeController::class);
+        Route::resource('salaries', SalaryController::class);
+        Route::resource('attendances', AttendanceController::class);
+        Route::get('employees/{employee}/create-user', [EmployeeController::class, 'createUser'])
+                ->name('employees.create-user');
+        Route::post('employees/{employee}/create-user', [EmployeeController::class, 'storeUser'])
+                ->name('employees.store-user');
+        Route::get('employees/{employee}/edit-user', [EmployeeController::class, 'editUser'])
+            ->name('employees.edit-user');
+        Route::put('employees/{employee}/update-user', [EmployeeController::class, 'updateUser'])
+            ->name('employees.update-user');
+    });
 
 Route::middleware(['auth', 'role:employee'])
     ->prefix('employee')
