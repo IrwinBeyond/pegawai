@@ -7,7 +7,7 @@
         <p class="text-gray-600 text-sm mt-1">Lengkapi form di bawah untuk menambahkan pegawai baru</p>
     </div>
 
-    <form action="{{ route('employees.store') }}" method="POST">
+    <form action="{{ route('admin.employees.store') }}" method="POST">
         @csrf  
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">  
             <div>
@@ -135,7 +135,7 @@
         </div>
 
         <div class="flex items-center justify-end space-x-3 mt-8 pt-6 border-t border-gray-200">
-            <a href="{{ route('employees.index') }}">
+            <a href="{{ route('admin.employees.index') }}">
                 <button type="button" class="px-6 py-2.5 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-all duration-200">
                     Batal
                 </button>

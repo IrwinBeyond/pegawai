@@ -7,7 +7,7 @@
         <p class="text-gray-600 text-sm mt-1">Kelola data kehadiran dan absensi pegawai</p>
     </div>
 
-    <form action="{{ route('attendances.store') }}" method="POST" class="mb-6">
+    <form action="{{ route('admin.attendances.store') }}" method="POST" class="mb-6">
         @csrf
         <div class="grid grid-cols-1 md:grid-cols-6 gap-3">
             <div class="md:col-span-2">
@@ -108,7 +108,7 @@
                             <div class="text-sm text-gray-600">{{ $attendance->tanggal }}</div>
                         </div>
                         
-                        <form action="{{ route('attendances.update', $attendance->id) }}" method="POST" id="edit-form-{{ $attendance->id }}" class="hidden">
+                        <form action="{{ route('admin.attendances.update', $attendance->id) }}" method="POST" id="edit-form-{{ $attendance->id }}" class="hidden">
                             @csrf
                             @method('PUT')
                             <div class="flex items-center space-x-2">
@@ -279,7 +279,7 @@
         const modal = document.getElementById('deleteModal');
         document.getElementById('employeeName').textContent = employeeName;
         document.getElementById('attendanceDate').textContent = attendanceDate;
-        document.getElementById('deleteForm').action = '/attendances/' + attendanceId;
+        document.getElementById('deleteForm').action = '/admin/attendances/' + attendanceId;
         
         modal.classList.remove('pointer-events-none');
         setTimeout(() => {

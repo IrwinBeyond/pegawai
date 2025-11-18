@@ -14,13 +14,16 @@ Route::get('/', function () {
 // Dashboard login redirect
 Route::get('/dashboard', function () {
     if (auth()->user()->role === 'admin') {
-        return redirect()->route('employees.index');
+        return redirect()->route('admin.employees.index');
     }
     return redirect()->route('employee.attendances.index');
 })->middleware(['auth'])->name('dashboard');
 
 // Admin Only
-Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['auth', 'role:admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
     Route::resource('departments', DepartmentController::class);
     Route::resource('positions', PositionController::class);
     Route::resource('employees', EmployeeController::class);

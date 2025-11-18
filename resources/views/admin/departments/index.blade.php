@@ -7,7 +7,7 @@
         <p class="text-gray-600 text-sm mt-1">Kelola departemen dalam perusahaan</p>
     </div>
 
-    <form action="{{ route('departments.store') }}" method="POST" class="mb-6">
+    <form action="{{ route('admin.departments.store') }}" method="POST" class="mb-6">
         @csrf
         <div class="flex items-end space-x-3">
             <div class="flex-1">
@@ -48,7 +48,7 @@
                             {{ $department->nama_departemen }}
                         </div>
                         
-                        <form action="{{ route('departments.update', $department->id) }}" method="POST" id="edit-form-{{ $department->id }}" class="hidden">
+                        <form action="{{ route('admin.departments.update', $department->id) }}" method="POST" id="edit-form-{{ $department->id }}" class="hidden">
                             @csrf
                             @method('PUT')
                             <div class="flex items-center space-x-2">
@@ -178,7 +178,7 @@
     function openDeleteModal(departmentId, departmentName) {
         const modal = document.getElementById('deleteModal');
         document.getElementById('departmentName').textContent = departmentName;
-        document.getElementById('deleteForm').action = '/departments/' + departmentId;
+        document.getElementById('deleteForm').action = '/admin/departments/' + departmentId;
         
         modal.classList.remove('pointer-events-none');
         setTimeout(() => {

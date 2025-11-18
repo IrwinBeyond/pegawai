@@ -34,7 +34,7 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">     
-                <a href="{{ url('/employees') }}" class="group">
+                <a href="{{ url('/admin/employees') }}" class="group">
                     <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 p-8">
                         <div class="flex flex-col items-center space-y-4">
                             <div class="bg-blue-100 p-4 rounded-full group-hover:bg-blue-600 transition-colors duration-300">
@@ -50,7 +50,7 @@
                     </div>
                 </a>
 
-                <a href="{{ url('/departments') }}" class="group">
+                <a href="{{ url('/admin/departments') }}" class="group">
                     <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 p-8">
                         <div class="flex flex-col items-center space-y-4">
                             <div class="bg-blue-100 p-4 rounded-full group-hover:bg-blue-600 transition-colors duration-300">
@@ -66,7 +66,7 @@
                     </div>
                 </a>
 
-                <a href="{{ url('/attendances') }}" class="group">
+                <a href="{{ url('/admin/attendances') }}" class="group">
                     <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 p-8">
                         <div class="flex flex-col items-center space-y-4">
                             <div class="bg-blue-100 p-4 rounded-full group-hover:bg-blue-600 transition-colors duration-300">
@@ -82,7 +82,7 @@
                     </div>
                 </a>
 
-                <a href="{{ url('/positions') }}" class="group">
+                <a href="{{ url('/admin/positions') }}" class="group">
                     <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 p-8">
                         <div class="flex flex-col items-center space-y-4">
                             <div class="bg-blue-100 p-4 rounded-full group-hover:bg-blue-600 transition-colors duration-300">
@@ -98,7 +98,7 @@
                     </div>
                 </a>
 
-                <a href="{{ url('/salaries') }}" class="group">
+                <a href="{{ url('/admin/salaries') }}" class="group">
                     <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 p-8">
                         <div class="flex flex-col items-center space-y-4">
                             <div class="bg-blue-100 p-4 rounded-full group-hover:bg-blue-600 transition-colors duration-300">

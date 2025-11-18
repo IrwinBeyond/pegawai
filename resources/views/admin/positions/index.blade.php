@@ -7,7 +7,7 @@
         <p class="text-gray-600 text-sm mt-1">Kelola jabatan dan gaji pokok dalam perusahaan</p>
     </div>
 
-    <form action="{{ route('positions.store') }}" method="POST" class="mb-6">
+    <form action="{{ route('admin.positions.store') }}" method="POST" class="mb-6">
         @csrf
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
             <div class="md:col-span-1">
@@ -62,7 +62,7 @@
                             <div class="text-sm text-gray-800 font-medium">{{ $position->nama_jabatan }}</div>
                         </div>
                         
-                        <form action="{{ route('positions.update', $position->id) }}" method="POST" id="edit-form-{{ $position->id }}" class="hidden">
+                        <form action="{{ route('admin.positions.update', $position->id) }}" method="POST" id="edit-form-{{ $position->id }}" class="hidden">
                             @csrf
                             @method('PUT')
                             <div class="flex items-center space-x-2">
@@ -206,7 +206,7 @@
     function openDeleteModal(positionId, positionName) {
         const modal = document.getElementById('deleteModal');
         document.getElementById('positionName').textContent = positionName;
-        document.getElementById('deleteForm').action = '/positions/' + positionId;
+        document.getElementById('deleteForm').action = '/admin/positions/' + positionId;
         
         modal.classList.remove('pointer-events-none');
         setTimeout(() => {

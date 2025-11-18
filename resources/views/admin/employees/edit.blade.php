@@ -9,7 +9,7 @@
     </div>
 
     <!-- Form Section -->
-    <form action="{{ route('employees.update', $employee->id) }}" method="POST">
+    <form action="{{ route('admin.employees.update', $employee->id) }}" method="POST">
         @csrf
         @method('PUT')
         
@@ -150,7 +150,7 @@
 
         <!-- Button Section -->
         <div class="flex items-center justify-end space-x-3 mt-8 pt-6 border-t border-gray-200">
-            <a href="{{ route('employees.index') }}">
+            <a href="{{ route('admin.employees.index') }}">
                 <button type="button" class="px-6 py-2.5 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-all duration-200">
                     Batal
                 </button>
