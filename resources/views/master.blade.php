@@ -64,7 +64,7 @@
                                 <li>
                                     <a href="{{ route('employee.home') }}"
                                        class="block px-4 py-2 text-white rounded-lg transition-all duration-300 ease-in-out hover:bg-blue-700
-                                           {{ request()->is('employee/') ? 'font-bold' : 'hover:font-bold' }}">
+                                           {{ request()->is('employee') ? 'font-bold' : 'hover:font-bold' }}">
                                         Home
                                     </a>
                                 </li>

@@ -125,9 +125,17 @@ class EmployeeController extends Controller
      */
     public function destroy(string $id)
     {
-        $employee = Employee::findOrFail($id);
+        $employee = Employee::with('user')->findOrFail($id);
+
+        if ($employee->user) {
+            $employee->user->delete();
+        }
+
         $employee->delete();
-        return redirect()->route('admin.employees.index');
+
+        return redirect()
+            ->route('admin.employees.index')
+            ->with('success', 'Pegawai dan akun login terkait berhasil dihapus.');
     }
 
     public function createUser(Employee $employee)

@@ -110,8 +110,10 @@
                 <p class="mt-2 text-sm text-gray-600">
                     Apakah Anda yakin ingin menghapus pegawai <span id="employeeName" class="font-semibold text-gray-900"></span>?
                 </p>
-                <p class="mt-1 text-sm text-red-600">
-                    Data yang sudah dihapus tidak dapat dikembalikan!
+                <p class="mt-1 text-sm text-red-600 leading-relaxed">
+                    Menghapus data pegawai juga akan <span class="font-semibold">menghapus akun login</span> 
+                    yang terkait dengan pegawai ini (jika ada), dan tindakan ini 
+                    <span class="font-semibold">tidak dapat dibatalkan!</span>
                 </p>
             </div>
 
