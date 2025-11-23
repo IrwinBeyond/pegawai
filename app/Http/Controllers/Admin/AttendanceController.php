@@ -12,14 +12,24 @@ class AttendanceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $q = $request->input('q');
+
         $attendances = Attendance::with('employee')
-                                 ->latest()
-                                 ->orderBy('id', 'desc')
-                                 ->paginate(10);
+            ->when($q, function ($query, $q) {
+                $query->whereHas('employee', function ($q2) use ($q) {
+                    $q2->where('nama_lengkap', 'like', '%' . $q . '%');
+                });
+            })
+            ->latest()
+            ->orderBy('id', 'desc')
+            ->paginate(10)
+            ->withQueryString();
+
         $employees = Employee::all();
-        return view('admin.attendances.index', compact('attendances', 'employees'));   
+
+        return view('admin.attendances.index', compact('attendances', 'employees', 'q'));
     }
 
     /**

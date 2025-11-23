@@ -12,13 +12,23 @@ class SalaryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $q = $request->input('q');
+
         $salaries = Salary::with('employee')
-                          ->latest()
-                          ->orderBy('id', 'desc')
-                          ->paginate(10);
-        return view('admin.salaries.index', compact('salaries'));
+            ->when($q, function ($query, $q) {
+                $query->whereHas('employee', function ($q2) use ($q) {
+                    $q2->where('nama_lengkap', 'like', '%' . $q . '%');
+                })
+                ->orWhere('bulan', 'like', '%' . $q . '%');
+            })
+            ->latest()
+            ->orderBy('id', 'desc')
+            ->paginate(10)
+            ->withQueryString();
+
+        return view('admin.salaries.index', compact('salaries', 'q'));
     }
 
     /**

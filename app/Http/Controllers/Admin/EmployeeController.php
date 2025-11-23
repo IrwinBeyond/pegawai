@@ -16,13 +16,28 @@ class EmployeeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $employees = Employee::with(relations: ['department', 'position'])
-                             ->latest()
-                             ->orderBy('id', 'desc')
-                             ->paginate(10);
-        return view('admin.employees.index', compact('employees'));
+        $q = $request->input('q');
+
+        $employees = Employee::with(['department', 'position'])
+            ->when($q, function ($query, $q) {
+                $query->where(function($q2) use ($q) {
+                    $q2->where('nama_lengkap', 'like', '%' . $q . '%')
+                    ->orWhereHas('department', function($q3) use ($q) {
+                            $q3->where('nama_departemen', 'like', '%' . $q . '%');
+                    })
+                    ->orWhereHas('position', function($q4) use ($q) {
+                            $q4->where('nama_jabatan', 'like', '%' . $q . '%');
+                    });
+                });
+            })
+            ->latest()
+            ->orderBy('id', 'desc')
+            ->paginate(10)
+            ->withQueryString();
+
+        return view('admin.employees.index', compact('employees', 'q'));
     }
 
     /**

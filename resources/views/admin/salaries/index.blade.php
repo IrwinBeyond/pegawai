@@ -17,6 +17,39 @@
         </a>
     </div>
 
+    <div class="mb-6">
+        <form method="GET" action="{{ route('admin.salaries.index') }}" class="flex items-center gap-2 w-full">
+            <input
+                id="q"
+                name="q"
+                type="search"
+                value="{{ request('q') }}"
+                placeholder="Cari berdasarkan nama pegawai atau bulan (contoh: Januari)..."
+                class="flex-1 w-full px-4 py-3 border border-gray-300 rounded-lg
+                    focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+            />
+
+            <button type="submit"
+                class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold shadow-sm">
+                Cari
+            </button>
+
+            @if(request()->filled('q'))
+                <a href="{{ route('admin.salaries.index') }}"
+                class="px-4 py-3 bg-gray-200 hover:bg-gray-300 rounded-lg text-sm font-medium">
+                    Reset
+                </a>
+            @endif
+        </form>
+
+        @if(request()->filled('q'))
+            <p class="mt-2 text-sm text-gray-600">
+                Hasil pencarian untuk:
+                <span class="font-medium text-gray-800">"{{ request('q') }}"</span>
+            </p>
+        @endif
+    </div>
+
     <div class="overflow-x-auto">
         <table class="min-w-full table-auto">
             <thead>
