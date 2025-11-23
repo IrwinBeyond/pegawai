@@ -14,7 +14,10 @@ class SalaryController extends Controller
      */
     public function index()
     {
-        $salaries = Salary::with('employee')->latest()->paginate(5);
+        $salaries = Salary::with('employee')
+                          ->latest()
+                          ->orderBy('id', 'desc')
+                          ->paginate(10);
         return view('admin.salaries.index', compact('salaries'));
     }
 

@@ -14,7 +14,10 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        $attendances = Attendance::with('employee')->latest()->paginate(5);
+        $attendances = Attendance::with('employee')
+                                 ->latest()
+                                 ->orderBy('id', 'desc')
+                                 ->paginate(10);
         $employees = Employee::all();
         return view('admin.attendances.index', compact('attendances', 'employees'));   
     }
