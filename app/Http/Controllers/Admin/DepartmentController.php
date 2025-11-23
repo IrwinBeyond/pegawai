@@ -13,8 +13,7 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        $departments = Department::latest()
-                                 ->orderBy('id', 'desc')
+        $departments = Department::orderBy('id', 'desc')
                                  ->paginate(10);
         return view('admin.departments.index', compact('departments'));
     }

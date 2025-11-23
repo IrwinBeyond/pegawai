@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Salary;
 use App\Models\Employee;
+use Illuminate\Validation\Rule;
 
 class SalaryController extends Controller
 {
@@ -23,7 +24,6 @@ class SalaryController extends Controller
                 })
                 ->orWhere('bulan', 'like', '%' . $q . '%');
             })
-            ->latest()
             ->orderBy('id', 'desc')
             ->paginate(10)
             ->withQueryString();
@@ -47,7 +47,15 @@ class SalaryController extends Controller
     {
         $request->validate([
             'karyawan_id' => 'required|exists:employees,id',
-            'bulan' => 'required|string|max:10',
+            'bulan' => [
+                'required',
+                'date_format:Y-m',
+                'max:7',
+                Rule::unique('salaries')->where(function ($query) use ($request) {
+                    return $query->where('karyawan_id', $request->karyawan_id)
+                                 ->where('bulan', $request->bulan);
+                }),
+            ],
             'tunjangan' => 'required|numeric|min:0',
             'potongan' => 'required|numeric|min:0',
         ]);
@@ -94,7 +102,15 @@ class SalaryController extends Controller
     {
         $request->validate([
             'karyawan_id' => 'required|exists:employees,id',
-            'bulan' => 'required|string|max:10',
+            'bulan' => [
+                'required',
+                'date_format:Y-m',
+                'max:7',
+                Rule::unique('salaries')->where(function ($query) use ($request) {
+                    return $query->where('karyawan_id', $request->karyawan_id)
+                                 ->where('bulan', $request->bulan);
+                }),
+            ],
             'tunjangan' => 'required|numeric|min:0',
             'potongan' => 'required|numeric|min:0',
         ]);

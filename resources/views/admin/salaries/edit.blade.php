@@ -33,20 +33,13 @@
                 <label for="bulan" class="block text-sm font-semibold text-gray-700 mb-2">
                     Bulan <span class="text-red-500">*</span>
                 </label>
-                <select id="bulan" 
-                        name="bulan" 
-                        required
-                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
-                    <option value="">-- Pilih Bulan --</option>
-                    @foreach ([
-                        'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-                        'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
-                    ] as $bulan)
-                        <option value="{{ $bulan }}" {{ $salary->bulan == $bulan ? 'selected' : '' }}>
-                            {{ $bulan }}
-                        </option>
-                    @endforeach
-                </select>
+                <input type="month"
+                    id="bulan"
+                    name="bulan"
+                    required
+                    value="{{ old('bulan') }}"
+                    class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
+                <p class="text-xs text-gray-500 mt-1">Pilih periode gaji (format otomatis: yyyy-mm).</p>
             </div>
 
             <div></div>

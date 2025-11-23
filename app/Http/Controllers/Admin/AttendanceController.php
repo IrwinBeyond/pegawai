@@ -22,7 +22,6 @@ class AttendanceController extends Controller
                     $q2->where('nama_lengkap', 'like', '%' . $q . '%');
                 });
             })
-            ->latest()
             ->orderBy('id', 'desc')
             ->paginate(10)
             ->withQueryString();

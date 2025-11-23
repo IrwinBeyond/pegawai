@@ -32,7 +32,6 @@ class EmployeeController extends Controller
                     });
                 });
             })
-            ->latest()
             ->orderBy('id', 'desc')
             ->paginate(10)
             ->withQueryString();
