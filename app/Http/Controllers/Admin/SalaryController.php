@@ -1,0 +1,145 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\Salary;
+use App\Models\Employee;
+use Illuminate\Validation\Rule;
+
+class SalaryController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request)
+    {
+        $q = $request->input('q');
+
+        $salaries = Salary::with('employee')
+            ->when($q, function ($query, $q) {
+                $query->whereHas('employee', function ($q2) use ($q) {
+                    $q2->where('nama_lengkap', 'like', '%' . $q . '%');
+                })
+                ->orWhere('bulan', 'like', '%' . $q . '%');
+            })
+            ->orderBy('id', 'desc')
+            ->paginate(10)
+            ->withQueryString();
+
+        return view('admin.salaries.index', compact('salaries', 'q'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        $employees = Employee::with('position')->get();
+        return view('admin.salaries.create', compact('employees'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'karyawan_id' => 'required|exists:employees,id',
+            'bulan' => [
+                'required',
+                'date_format:Y-m',
+                'max:7',
+                Rule::unique('salaries')->where(function ($query) use ($request) {
+                    return $query->where('karyawan_id', $request->karyawan_id)
+                                 ->where('bulan', $request->bulan);
+                }),
+            ],
+            'tunjangan' => 'required|numeric|min:0',
+            'potongan' => 'required|numeric|min:0',
+        ]);
+
+        $employee = Employee::with('position')->findOrFail($request->karyawan_id);
+        $gajiPokok = $employee->position->gaji_pokok ?? 0;
+        $gajiTotal = $gajiPokok + $request->tunjangan - $request->potongan;
+
+        Salary::create([
+            'karyawan_id' => $request->karyawan_id,
+            'bulan' => $request->bulan,
+            'gaji_pokok' => $gajiPokok,
+            'tunjangan' => $request->tunjangan,
+            'potongan' => $request->potongan,
+            'total_gaji' => $gajiTotal,
+        ]);
+
+        return redirect()->route('admin.salaries.index');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        $salary = Salary::with('employee')->findOrFail($id);
+        return view('admin.salaries.show', compact('salary'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $salary = Salary::findOrFail($id);
+        $employees = Employee::with('position')->get();
+        return view('admin.salaries.edit', compact('salary', 'employees'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        $request->validate([
+            'karyawan_id' => 'required|exists:employees,id',
+            'bulan' => [
+                'required',
+                'date_format:Y-m',
+                'max:7',
+                Rule::unique('salaries')->where(function ($query) use ($request) {
+                    return $query->where('karyawan_id', $request->karyawan_id)
+                                 ->where('bulan', $request->bulan);
+                }),
+            ],
+            'tunjangan' => 'required|numeric|min:0',
+            'potongan' => 'required|numeric|min:0',
+        ]);
+
+        $employee = Employee::with('position')->findOrFail($request->karyawan_id);
+        $gajiPokok = $employee->position->gaji_pokok ?? 0;
+        $gajiTotal = $gajiPokok + $request->tunjangan - $request->potongan;
+
+        $salary = Salary::findOrFail($id);
+        $salary->update([
+            'karyawan_id' => $request->karyawan_id,
+            'bulan' => $request->bulan,
+            'gaji_pokok' => $gajiPokok,
+            'tunjangan' => $request->tunjangan,
+            'potongan' => $request->potongan,
+            'total_gaji' => $gajiTotal,
+        ]);
+
+        return redirect()->route('admin.salaries.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        $salary = Salary::findOrFail($id);
+        $salary->delete();
+
+        return redirect()->route('admin.salaries.index');
+    }
+}
