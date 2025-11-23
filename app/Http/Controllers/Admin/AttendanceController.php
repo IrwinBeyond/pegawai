@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Attendance;
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class AttendanceController extends Controller
 {
@@ -80,21 +81,25 @@ class AttendanceController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'karyawan_id' => 'required|exists:employees,id',
-            'tanggal' => 'required|date',
-            'waktu_masuk' => 'nullable|date_format:H:i',
-            'waktu_keluar' => 'nullable|date_format:H:i|after_or_equal:waktu_masuk',
             'status_absensi' => 'required|in:hadir,izin,sakit,alpha',
         ]);
 
         $attendance = Attendance::findOrFail($id);
-        $attendance->update($request->only([    
-            'karyawan_id',
-            'tanggal',
+
+        $updateData = $request->only([    
             'waktu_masuk',
             'waktu_keluar',
             'status_absensi',
-        ]));
+        ]);
+
+        if (!empty($updateData['waktu_masuk'])) {
+            $updateData['waktu_masuk'] = date('H:i', strtotime($updateData['waktu_masuk']));
+        }
+        if (!empty($updateData['waktu_keluar'])) {
+            $updateData['waktu_keluar'] = date('H:i', strtotime($updateData['waktu_keluar']));
+        }
+
+        $attendance->update($updateData);
 
         return redirect()->route('admin.attendances.index');
     }
