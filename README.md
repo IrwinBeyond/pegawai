@@ -89,16 +89,16 @@ To run this project properly, make sure you have installed:
 
 ---
 
-## 🖼️ UI Screenshots
+## 🖼️ UI Screenshot
 
 ### Welcome Page
-<img src="resources/screenshots/welcome.png" width="400">
+<img src="resources/images/pegawai-welcome-page.png" width="400">
 
 ---
 
 ### 🔐 Login Page (Powered by *Laravel Breeze*)
 
-<img src="resources/screenshots/auth/login.png" width="400">
+<img src="resources/images/auth/login.png" width="400">
 
 ---
 
@@ -106,52 +106,86 @@ To run this project properly, make sure you have installed:
 
 ### 👥 Employees
 - **Index Page**  
-  <img src="resources/screenshots/admin/employees/index.png" width="400">
+  <img src="resources/images/admin/employees/index.png" width="400">
 
 - **Create Page**  
-  <img src="resources/screenshots/admin/employees/create.png" width="400">
+  <img src="resources/images/admin/employees/create.png" width="400">
 
 - **Edit Page**  
-  <img src="resources/screenshots/admin/employees/edit.png" width="400">
+  <img src="resources/images/admin/employees/edit.png" width="400">
 
 - **Show Page**  
-  <img src="resources/screenshots/admin/employees/show.png" width="400">
+  <img src="resources/images/admin/employees/show.png" width="400">
 
 - **Create User Account**  
-  <img src="resources/screenshots/admin/employees/create-user.png" width="400">
+  <img src="resources/images/admin/employees/create-user.png" width="400">
 
 - **Edit User Account**  
-  <img src="resources/screenshots/admin/employees/edit-user.png" width="400">
+  <img src="resources/images/admin/employees/edit-user.png" width="400">
+
+- **Delete Page**  
+  <img src="resources/images/admin/employees/delete.png" width="400">
 
 ---
 
 ### 🏢 Departments
-<img src="resources/screenshots/admin/departments/index.png" width="400">
+- **Index Page**
+<img src="resources/images/admin/departments/index.png" width="400">
+
+- **Edit Action**
+<img src="resources/images/admin/departments/edit.png" width="400">
+
+- **Delete Page**
+<img src="resources/images/admin/departments/delete.png" width="400">
 
 ---
 
 ### 💼 Positions
-<img src="resources/screenshots/admin/positions/index.png" width="400">
+- **Index Page**
+<img src="resources/images/admin/positions/index.png" width="400">
+
+- **Edit Action**
+<img src="resources/images/admin/positions/edit.png" width="400">
+
+- **Delete Page**
+<img src="resources/images/admin/positions/delete.png" width="400">
 
 ---
 
 ### 🕒 Attendances
-<img src="resources/screenshots/admin/attendances/index.png" width="400">
+- **Index Page**
+<img src="resources/images/admin/attendances/index.png" width="400">
+
+- **Edit Action**
+<img src="resources/images/admin/attendances/edit.png" width="400">
+
+- **Delete Page**
+<img src="resources/images/admin/attendances/delete.png" width="400">
 
 ---
 
 ### 💰 Salaries
-<img src="resources/screenshots/admin/salaries/index.png" width="400">
+- **Index Page**  
+<img src="resources/images/admin/salaries/index.png" width="400">
+
+- **Create Page**  
+<img src="resources/images/admin/salaries/create.png" width="400">
+
+- **Edit Page**  
+<img src="resources/images/admin/salaries/edit.png" width="400">
+
+- **Delete Page**  
+<img src="resources/images/admin/salaries/delete.png" width="400">
 
 ---
 
 # 🟢 Employee Panel
 
 ### 🏠 Employee Dashboard
-<img src="resources/screenshots/employee/dashboard.png" width="400">
+<img src="resources/images/employee/dashboard.png" width="400">
 
-### 🕒 Attendance (Self-Service)
-<img src="resources/screenshots/employee/attendances/index.png" width="400">
+### 🕒 Attendance
+<img src="resources/images/employee/attendances/index.png" width="400">
 
 ---
 
