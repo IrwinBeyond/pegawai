@@ -5,31 +5,49 @@
 <h1 align="center">Employee Management System</h1>
 
 <p align="center">
-    A simple and lightweight employee management web app built with <strong>Laravel</strong> and styled using <strong>Tailwind CSS</strong>.<br>
-    Designed for learning purposes and CRUD practice across multiple data entities.
+    A role-based employee management web application built with <strong>Laravel</strong>, <strong>Laravel Breeze</strong>, and <strong>Tailwind CSS</strong>.<br>
+    Designed for learning, CRUD practice, and real-world simulation of HR workflows.
 </p>
 
 ---
 
 ## 🚀 Features Overview
 
-This project manages five main modules, each supporting full CRUD functionality:
+This project now includes a richer feature set with structured role separation between <strong>Admin</strong> and <strong>Employee</strong> panels.
 
+### 🔵 Admin Panel — Full CRUD Modules
 | Module | Description |
 |---------|-------------|
-| **Employees** | Add, edit, view, and delete employee data. Includes detailed profile pages. |
-| **Departments** | Manage department information and associate employees with specific departments. |
-| **Positions** | Handle company positions or roles for employees. |
-| **Attendances** | Track and manage employee attendance records. |
-| **Salaries** | Record and update salary information, linked to employee data. |
+| **Employees** | Complete employee management with profile pages and login account creation (create-user, edit-user) with advanced search by employee name, departments, and positions. |
+| **Departments** | Manage department information and associate employees with departments. |
+| **Positions** | Manage company positions with base salary configuration. |
+| **Attendances** | Track and manage employee attendance with advanced search by employee name. |
+| **Salaries** | Create, update, and calculate salaries with advanced search by employee name and salary month. |
+
+### 🟢 Employee Panel — Self-Service Portal
+- **Personal dashboard** with profile, today's attendance status, and latest salary summary.
+- Attendance self-service:
+  - **Check-in** (prevents double check-in)
+  - **Check-out** (prevents double check-out)
+- View last 30 days of attendance history.
+
+### 🔐 Authentication & Roles
+- Authentication handled by **Laravel Breeze**.
+- Role-based access control:
+  - `admin`
+  - `employee`
+- Automatic redirect:  
+  `/dashboard` → admin panel or employee dashboard depending on role.
+- Each user is linked to an employee record via `hasOne`.
 
 ---
 
 ## 🛠️ Technologies Used
 
-- **Laravel** — backend framework for routing, database management, and MVC structure.  
-- **Tailwind CSS** — utility-first CSS framework for responsive and modern UI styling.  
-- **Vite** — for fast asset bundling and development server.  
+- **Laravel** — backend framework providing routing, controllers, and MVC structure.  
+- **Tailwind CSS** — utility-first responsive UI framework.  
+- **Laravel Breeze** — authentication scaffolding with session middleware.  
+- **Vite** — lightning-fast asset bundling.  
 
 ---
 
@@ -37,10 +55,10 @@ This project manages five main modules, each supporting full CRUD functionality:
 
 To run this project properly, make sure you have installed:
 
-- **PHP 8.1+**  
-- **Composer**  
-- **Node.js** *(for building Tailwind and running frontend assets)*  
-  → [Download Node.js here](https://nodejs.org/en/download)  
+- **PHP 8.1+**
+- **Composer**
+- **Node.js**  
+  → [Download Node.js here](https://nodejs.org/en/download)
 
 ---
 
@@ -74,99 +92,71 @@ To run this project properly, make sure you have installed:
 ## 🖼️ UI Screenshots
 
 ### Welcome Page
+<img src="resources/screenshots/welcome.png" width="400">
 
-<img src="resources/images/pegawai-welcome-page.png" width="400">
+---
+
+### 🔐 Login Page (Powered by *Laravel Breeze*)
+
+<img src="resources/screenshots/auth/login.png" width="400">
+
+---
+
+# 🔵 Admin Panel
 
 ### 👥 Employees
-**Main Pages**
-- **Index Page**
+- **Index Page**  
+  <img src="resources/screenshots/admin/employees/index.png" width="400">
 
-  <img src="resources/images/employees/index.png" width="400">
+- **Create Page**  
+  <img src="resources/screenshots/admin/employees/create.png" width="400">
 
-- **Create Page**
+- **Edit Page**  
+  <img src="resources/screenshots/admin/employees/edit.png" width="400">
 
-  <img src="resources/images/employees/create.png" width="400">
+- **Show Page**  
+  <img src="resources/screenshots/admin/employees/show.png" width="400">
 
-- **Edit Page**
+- **Create User Account**  
+  <img src="resources/screenshots/admin/employees/create-user.png" width="400">
 
-  <img src="resources/images/employees/edit.png" width="400">
-
-- **Show Page**
-
-  <img src="resources/images/employees/show.png" width="400">
-
-- **Delete (Destroy) Confirmation**
-
-  <img src="resources/images/employees/destroy.png" width="400">
+- **Edit User Account**  
+  <img src="resources/screenshots/admin/employees/edit-user.png" width="400">
 
 ---
 
 ### 🏢 Departments
-- **Index & Create Page**
-
-  <img src="resources/images/departments/index.png" width="400">
-
-- **Edit Page**
-
-  <img src="resources/images/departments/edit.png" width="400">
-
-- **Delete (Destroy) Confirmation**
-
-  <img src="resources/images/departments/destroy.png" width="400">
+<img src="resources/screenshots/admin/departments/index.png" width="400">
 
 ---
 
 ### 💼 Positions
-- **Index & Create Page**
-
-  <img src="resources/images/positions/index.png" width="400">
-
-- **Edit Page**
-
-  <img src="resources/images/positions/edit.png" width="400">
-
-- **Delete (Destroy) Confirmation**
-
-  <img src="resources/images/positions/destroy.png" width="400">
+<img src="resources/screenshots/admin/positions/index.png" width="400">
 
 ---
 
 ### 🕒 Attendances
-- **Index & Create Page**
-
-  <img src="resources/images/attendances/index.png" width="400">
-
-- **Edit Page**
-
-  <img src="resources/images/attendances/edit.png" width="400">
-
-- **Delete (Destroy) Confirmation**
-
-  <img src="resources/images/attendances/destroy.png" width="400">
+<img src="resources/screenshots/admin/attendances/index.png" width="400">
 
 ---
 
 ### 💰 Salaries
-- **Index Page**
+<img src="resources/screenshots/admin/salaries/index.png" width="400">
 
-  <img src="resources/images/salaries/index.png" width="400">
+---
 
-- **Create Page**
+# 🟢 Employee Panel
 
-  <img src="resources/images/salaries/create.png" width="400">
+### 🏠 Employee Dashboard
+<img src="resources/screenshots/employee/dashboard.png" width="400">
 
-- **Edit Page**
-
-  <img src="resources/images/salaries/edit.png" width="400">
-
-- **Delete (Destroy) Confirmation**
-
-  <img src="resources/images/salaries/destroy.png" width="400">
+### 🕒 Attendance (Self-Service)
+<img src="resources/screenshots/employee/attendances/index.png" width="400">
 
 ---
 
 ## 🧑‍💻 Author
-Developed by **Irwin Beyond** as part of the *Framework Programming Workshop* course at EEPIS (PENS).
+Developed by **Irwin Beyond** as part of the <em>Framework Programming Workshop</em> course at EEPIS (PENS).
 
 ---
 
