@@ -24,7 +24,7 @@
                 name="q"
                 type="search"
                 value="{{ request('q') }}"
-                placeholder="Cari berdasarkan nama pegawai atau bulan (contoh: Januari)..."
+                placeholder="Cari berdasarkan nama pegawai atau bulan (contoh: 2024-09)..."
                 class="flex-1 w-full px-4 py-3 border border-gray-300 rounded-lg
                     focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
             />
