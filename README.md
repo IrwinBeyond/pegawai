@@ -194,6 +194,12 @@ Developed by **Irwin Beyond** as part of the <em>Framework Programming Workshop<
 
 ---
 
+## 📄 License
+
+This project is open-sourced under the [MIT License](LICENSE).
+
+---
+
 <p align="center">
     <sub>Built with ❤️ using Laravel & Tailwind CSS</sub>
 </p>
